@@ -1,0 +1,58 @@
+version: '3.7'
+
+services:
+  mysql:
+    image: mysql:$MYSQL_VERSION
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQL_DATABASE
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - LANG=C.UTF-8
+      - TZ=Europe/UTC
+    ports:
+      - 23306:3306
+    volumes:
+      - ./mysql/data:/var/lib/mysql/:rw
+      - ./mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d/:ro
+      - ./mysql/conf.d:/etc/mysql/conf.d/:ro
+
+
+  nginx:
+    image: nginx
+    restart: always
+
+    volumes:
+      - "./etc/nginx/conf.d:/etc/nginx/conf.d:ro"
+      - "./etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "./etc/nginx/sites-enabled:/etc/nginx/sites-enabled:ro"
+
+      # Static server
+      - ./server/images:/etc/nginx/html/images:ro
+      - ./server/agreements:/etc/nginx/html/agreements:ro
+
+    ports:
+      # Static
+      - "80:80"
+      - "8080:8080"
+
+    depends_on:
+      - server
+
+  server:
+    image: server:${SERVER_VERSION}
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
+      args:
+        VERSION: ${SERVER_VERSION}
+    environment:
+      - CONTAINER_TIMEZONE=Europe/UTC
+    volumes:
+      #      - ./server/config:/home/backend/config:ro
+      - ./server/logs:/home/backend/logs:rw
+      - ./server/images:/home/backend/images:rw
+      - ./server/config:/home/backend/config:ro
+      - ./server/geoip:/home/backend/geoip:ro
+    depends_on:
+      - mysql
