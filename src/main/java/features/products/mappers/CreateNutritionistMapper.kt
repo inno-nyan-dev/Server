@@ -1,8 +1,8 @@
-package features.accounts.mappers
+package features.products.mappers
 
 import base.Mappers
-import features.accounts.ProductsEntity
-import features.accounts.ProductsResponse
+import features.products.ProductsEntity
+import features.products.ProductsResponse
 
 
 class ProductMapper : Mappers.IProductMapper {

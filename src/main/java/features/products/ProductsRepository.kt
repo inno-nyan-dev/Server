@@ -1,4 +1,4 @@
-package features.accounts
+package features.products
 
 import base.BaseRepository
 import base.Mappers

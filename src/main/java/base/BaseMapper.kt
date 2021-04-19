@@ -1,7 +1,8 @@
 package base
 
-import features.accounts.ProductsEntity
-import features.accounts.ProductsResponse
+import features.accounts.*
+import features.products.ProductsEntity
+import features.products.ProductsResponse
 
 interface BaseMapper
 
@@ -40,4 +41,6 @@ interface BaseEntityMapper<EntityA, EntityB> : BaseMapper {
 
 interface Mappers {
     interface IProductMapper : BaseResponseMapper<ProductsEntity, ProductsResponse>
+    interface ISignUpMapper : BaseRequestMapper<SignUpRequest, SignUpEntity>
+    interface ILoginMapper : BaseResponseMapper<LoginEntity, LoginResponse>, BaseRequestMapper<LoginRequest, LoginEntity>
 }

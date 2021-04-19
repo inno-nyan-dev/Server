@@ -1,4 +1,4 @@
-package features.accounts
+package features.products
 
 import base.OperationStatus
 import io.swagger.annotations.ApiOperation

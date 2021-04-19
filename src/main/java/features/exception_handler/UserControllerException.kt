@@ -27,10 +27,37 @@ class UserControllerException {
     fun handleImagesSizeTooBigException(exception: ImagesSizeTooBigException): ResponseEntity<*> {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.simpleResponse)
     }
+
+    @ExceptionHandler
+    fun handleWrongCredentialsException(exception: WrongCredentialsException): ResponseEntity<*> {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.simpleResponse)
+    }
+
+    @ExceptionHandler
+    fun handleAccountNotCreatedException(exception: AccountNotCreatedException): ResponseEntity<*> {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.simpleResponse)
+    }
+
+    @ExceptionHandler
+    fun handleEmailOccupiedException(exception: EmailOccupiedException): ResponseEntity<*> {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.simpleResponse)
+    }
 }
 
 
 class NoProductsFound(exceptionMessage: String = ConstantResponses.NO_PRODUCTS_FOUND) : BaseCustomException(exceptionMessage) {
+    var simpleResponse: SimpleResponse = SimpleResponse(exceptionMessage)
+}
+
+class WrongCredentialsException(exceptionMessage: String = ConstantResponses.WRONG_CREDENTIALS) : BaseCustomException(exceptionMessage) {
+    var simpleResponse: SimpleResponse = SimpleResponse(exceptionMessage)
+}
+
+class AccountNotCreatedException(exceptionMessage: String = ConstantResponses.ACCOUNT_NOT_CREATED) : BaseCustomException(exceptionMessage) {
+    var simpleResponse: SimpleResponse = SimpleResponse(exceptionMessage)
+}
+
+class EmailOccupiedException(exceptionMessage: String = ConstantResponses.EMAIL_OCCUPIED) : BaseCustomException(exceptionMessage) {
     var simpleResponse: SimpleResponse = SimpleResponse(exceptionMessage)
 }
 

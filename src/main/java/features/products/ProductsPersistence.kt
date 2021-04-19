@@ -1,4 +1,4 @@
-package features.accounts
+package features.products
 
 import base.BasePersistence
 import org.springframework.stereotype.Component
