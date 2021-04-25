@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `product_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_image_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `product_dang_level` tinyint(4) NOT NULL COMMENT 'Dangerousity level',
+  `product_image_url` varchar(255) COLLATE utf8mb4_unicode_ci,
+  `product_dang_level` varchar(20) NOT NULL COMMENT 'Dangerousity level',
   `product_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -34,7 +34,7 @@ CREATE TABLE `products` (
 -- Records of products
 -- ----------------------------
 BEGIN;
-INSERT INTO `products` VALUES (1, 'Шашлык', 'https://im0-tub-ru.yandex.net/i?id=bef34b0aa546e55ff00fefffb3c24e5f&n=13&exp=1', 0, 'Шашлык машлык, мясо в башлык');
+INSERT INTO `products` VALUES (1, 'Herb', 'https://im0-tub-ru.yandex.net/i?id=bef34b0aa546e55ff00fefffb3c24e5f&n=13&exp=1', 'safe', 'Herbs are the kind of food rabbits are born to digest. Feeding them herbs ensures that the digestion processes are intact and functioning normally. There are many types of herbs that one can buy in the shops, human-edible are okay too. Self-produced herbs are also very good, for example good ones: medicago, pisum, avena, rye, wheat, dandelions, or plain hay.');
 COMMIT;
 
 -- ----------------------------
