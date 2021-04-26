@@ -82,4 +82,4 @@ INSERT INTO `users` VALUES (6,'bozman@gmail.com','9f735e0df9a1ddc702bf0a1a7b8303
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-26 11:20:36
+-- Dump completed on 2021-04-26 11:19:59
