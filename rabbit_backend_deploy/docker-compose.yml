@@ -27,6 +27,12 @@ services:
       - "./etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
       - "./etc/nginx/sites-enabled:/etc/nginx/sites-enabled:ro"
 
+      # Let's Encrypt! (read-only)
+      ## Certificates dir
+      - "${LETSENCRYPT_ROOT:-/etc/letsencrypt}:/etc/letsencrypt:ro"
+      ## ACME challenges dir
+      - "${LETSENCRYPT_ACME:-/var/lib/letsencrypt}:/var/lib/letsencrypt:ro"
+
       # Static server
       - ./server/images:/etc/nginx/html/images:ro
       - ./server/agreements:/etc/nginx/html/agreements:ro
@@ -34,7 +40,11 @@ services:
     ports:
       # Static
       - "80:80"
-      - "8080:8080"
+      - "443:443"
+
+      # REST
+      - "8443:8443"
+
 
     depends_on:
       - server
@@ -56,3 +66,46 @@ services:
       - ./server/geoip:/home/backend/geoip:ro
     depends_on:
       - mysql
+
+
+  # Let's Encrypt client for bootstrap
+  certbot-bootstrap:
+    image: certbot/certbot
+    volumes:
+      # Let's Encrypt! (read-write)
+      ## Certificates dir
+      - "${LETSENCRYPT_ROOT:-/etc/letsencrypt}:/etc/letsencrypt"
+      ## ACME challenges dir
+      - "${LETSENCRYPT_ACME:-/var/lib/letsencrypt}:/var/lib/letsencrypt"
+
+    ports:
+      - "80:80"
+
+    entrypoint: [
+      # common options
+      "certbot",
+      "--non-interactive", "--agree-tos",
+      "--email",
+      "${LETSENCRYPT_EMAIL:-pavelsarpov@gmail.com}",
+      # bootstrap
+      "certonly",
+      "--standalone"
+    ]
+
+  # Let's Encrypt client for renew
+  certbot:
+    image: certbot/certbot
+    volumes:
+      # Let's Encrypt! (read-write)
+      ## Certificates dir
+      - "${LETSENCRYPT_ROOT:-/etc/letsencrypt}:/etc/letsencrypt"
+      ## ACME challenges dir
+      - "${LETSENCRYPT_ACME:-/var/lib/letsencrypt}:/var/lib/letsencrypt"
+
+    entrypoint: [
+      # common options
+      "certbot",
+      "--non-interactive", "--agree-tos",
+      "--email",
+      "${LETSENCRYPT_EMAIL:-pavelsarpov@gmail.com}",
+    ]  # Let's Encrypt client for renew
