@@ -1,4 +1,4 @@
-ф# Setup
+#Setup
 
 ## Environment
 
