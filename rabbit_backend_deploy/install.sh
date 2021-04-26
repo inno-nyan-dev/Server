@@ -16,8 +16,8 @@ openssl dhparam -out /etc/letsencrypt/ssl/dhparams.pem 2048
 # Bootstrap certificates with --standalone server.
 docker-compose run --service-ports --rm \
   certbot-bootstrap \
-    --cert-name rabbit.info \
-    -d rabbit.info -d www.rabbit.info --verbose
+    --cert-name petfood.mexator.xyz \
+    -d petfood.mexator.xyz --verbose
 
 echo ""
 echo "****************************************"
@@ -41,8 +41,8 @@ docker-compose run --rm \
   certbot certonly \
     --webroot \
     --webroot-path /var/lib/letsencrypt \
-    --cert-name rabbit.info \
-    -d rabbit.info -d www.rabbit.info
+    --cert-name petfood.mexator.xyz \
+    -d petfood.mexator.xyz
 
 # Test renew setup
 docker-compose run --rm \
