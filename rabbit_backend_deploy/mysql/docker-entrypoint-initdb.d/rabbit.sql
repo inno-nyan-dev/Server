@@ -22,7 +22,7 @@
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `product_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `product_image_url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_dang_level` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Dangerousity level',
@@ -64,7 +64,7 @@ CREATE TABLE `users` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-);
+)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,6 +72,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` VALUES (6,'bozman@gmail.com','9f735e0df9a1ddc702bf0a1a7b83033f9f7153a00c29de82cedadc9957289b05','6a36494591fbaa1eee1afd54636783f1acb4e48ebd4fdcb1fda4424ffce74415');
+
+SET FOREIGN_KEY_CHECKS = 1;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
