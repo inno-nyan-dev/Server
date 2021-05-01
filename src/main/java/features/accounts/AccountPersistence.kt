@@ -46,4 +46,24 @@ class AccountPersistence : BasePersistence() {
             }
         }
     }
+
+    fun getUserByToken(token: String): UserEntity? {
+        connect().use {
+            val query = """SELECT * FROM users u WHERE u.token = ?"""
+            it.prepareStatement(query).use{
+                it.setString(1, token)
+                it.executeQuery().use{
+                    return if(it.next()){
+                        UserEntity(
+                                userId = it.getLong("id"),
+                                email = it.getString("email"),
+                                token = it.getString("token")
+                        )
+                    } else{
+                        null
+                    }
+                }
+            }
+        }
+    }
 }

@@ -42,6 +42,16 @@ class UserControllerException {
     fun handleEmailOccupiedException(exception: EmailOccupiedException): ResponseEntity<*> {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.simpleResponse)
     }
+
+    @ExceptionHandler
+    fun handleUserNotFoundException(exception: UserNotFoundException): ResponseEntity<*> {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(exception.simpleResponse)
+    }
+
+    @ExceptionHandler
+    fun handleFavoriteProductsNotFound(exception: FavoriteProductsNotFound): ResponseEntity<*> {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.simpleResponse)
+    }
 }
 
 
@@ -66,5 +76,13 @@ class ImageIsEmptyException(exceptionMessage: String = ConstantResponses.IMAGE_I
 }
 
 class ImagesSizeTooBigException(exceptionMessage: String = ConstantResponses.IMAGE_SIZE_TOO_BIG(2)) : BaseCustomException(exceptionMessage) {
+    var simpleResponse: SimpleResponse = SimpleResponse(exceptionMessage)
+}
+
+class UserNotFoundException(exceptionMessage: String = ConstantResponses.USER_NOT_FOUND) : BaseCustomException(exceptionMessage) {
+    var simpleResponse: SimpleResponse = SimpleResponse(exceptionMessage)
+}
+
+class FavoriteProductsNotFound(exceptionMessage: String = ConstantResponses.NO_FAVORITE_PRODUCTS) : BaseCustomException(exceptionMessage) {
     var simpleResponse: SimpleResponse = SimpleResponse(exceptionMessage)
 }

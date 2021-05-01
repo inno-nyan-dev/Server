@@ -1,8 +1,8 @@
 -- MariaDB dump 10.19  Distrib 10.5.9-MariaDB, for Linux (x86_64)
 --
--- Host: 192.168.1.9    Database: rabbit
+-- Host: 3.17.102.92    Database: rabbit
 -- ------------------------------------------------------
--- Server version	5.7.33
+-- Server version	5.7.34
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -19,6 +19,7 @@
 -- Table structure for table `products`
 --
 
+DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `products` (
@@ -28,7 +29,7 @@ CREATE TABLE `products` (
   `product_dang_level` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Dangerousity level',
   `product_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -56,6 +57,7 @@ INSERT INTO `products` VALUES (16,'Banana','17.jpg','with_care','Bananas contain
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
@@ -64,7 +66,7 @@ CREATE TABLE `users` (
   `password` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,8 +74,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` VALUES (6,'bozman@gmail.com','9f735e0df9a1ddc702bf0a1a7b83033f9f7153a00c29de82cedadc9957289b05','6a36494591fbaa1eee1afd54636783f1acb4e48ebd4fdcb1fda4424ffce74415');
-
+INSERT INTO `users` VALUES (7,'bozman2@gmail.com','9f735e0df9a1ddc702bf0a1a7b83033f9f7153a00c29de82cedadc9957289b05','58bb8a14b8ba06ab713322bc6af9b8d6884958ab8c27537f57017b750f96c038');
+INSERT INTO `users` VALUES (8,'123@gmail.com','9f735e0df9a1ddc702bf0a1a7b83033f9f7153a00c29de82cedadc9957289b05','7261639f5073b9741d13c6e932472a68d5ddba05e71c03406ebbda513b1ba0aa');
+INSERT INTO `users` VALUES (9,'oninbo','9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08','d4140c09f05b0aeb29b58489d75bb43da943efbb5266b41a25878aa949d8db54');
+INSERT INTO `users` VALUES (10,'hello','5a0588f74d72cf58db217762c571eb29580755ae7c718dc8683f3830c57f0981','0b135511cf7cfe58095603f374c95394b2be12e17b2bcfc0ff9406496171670b');
 SET FOREIGN_KEY_CHECKS = 1;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -84,4 +90,19 @@ SET FOREIGN_KEY_CHECKS = 1;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-26 11:20:36
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for favorites
+-- ----------------------------
+DROP TABLE IF EXISTS `favorites`;
+CREATE TABLE `favorites` (
+                             `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                             `user_id` int(10) unsigned NOT NULL,
+                             `product_id` int(10) unsigned NOT NULL,
+                             PRIMARY KEY (`id`),
+                             KEY `fav_prod_id` (`product_id`),
+                             CONSTRAINT `fav_prod_id` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

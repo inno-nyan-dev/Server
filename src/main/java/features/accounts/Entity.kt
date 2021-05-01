@@ -14,3 +14,9 @@ data class SignUpEntity(
         var password: String,
         var token: String
 )
+
+data class UserEntity(
+        val userId: Long = -1L,
+        val token:String = "",
+        val email: String = ""
+)

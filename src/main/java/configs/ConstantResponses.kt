@@ -9,5 +9,9 @@ class ConstantResponses {
         const val NO_PRODUCTS_FOUND = "Не найдено продуктов"
         val IMAGE_SIZE_TOO_BIG = fun(imageSize: Int) = "Размер изображения превышает $imageSize МБ."
         const val IMAGE_IS_EMPTY = "Изображение не найдено"
+        const val USER_NOT_FOUND = "Пользватель с этим токеном не найден"
+        const val NO_FAVORITE_PRODUCTS  = "Не найдено продуктов в списке избранных"
+        const val FAVORITES_REMOVED = "Продукт удален из избранных"
+        const val FAVORITES_ADDED = "Продукт добавлен в избранные"
     }
 }
