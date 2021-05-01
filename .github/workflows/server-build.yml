@@ -1,0 +1,45 @@
+name: Build and push to dockerhub
+
+on: 
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Clone
+      - uses: actions/checkout@v2
+      
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      
+      - name: GitHub Action for Maven
+        uses: LucaFeger/action-maven-cli@1.1.0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build project
+        run: |
+        mvn clean 
+        mvn install 
+        cp target/rabbit_backend-1.0.jar rabbit_backend_deploy/server
+        cd rabbit_backend_deploy
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: ./rabbit_backend_deploy/server
+          push: true
+          tags: ravioo/rabbit-backend:latest
+      
