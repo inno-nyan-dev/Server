@@ -13,12 +13,10 @@ jobs:
       - uses: actions/checkout@v2
       
       - name: Set up JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v2
         with:
-          java-version: 1.8
-      
-      - name: GitHub Action for Maven
-        uses: LucaFeger/action-maven-cli@1.1.0
+          java-version: 11
+          distribution: adopt
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -31,15 +29,15 @@ jobs:
 
       - name: Build project
         run: |
-        mvn clean 
-        mvn install 
-        cp target/rabbit_backend-1.0.jar rabbit_backend_deploy/server
-        cd rabbit_backend_deploy
+          mvn clean 
+          mvn install 
+          cp target/rabbit_backend-1.0.jar rabbit_backend_deploy/server/rabbit_backend-latest.jar
+          cd rabbit_backend_deploy
 
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: ./rabbit_backend_deploy/server
           push: true
-          tags: ravioo/rabbit-backend:latest
+          tags: ravioo/rabbit-backend:1.0
       
