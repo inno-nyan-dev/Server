@@ -2,16 +2,16 @@ package configs
 
 class ConstantResponses {
     companion object {
-        const val ACCOUNT_CREATED = "Аккаунт успешно создан"
-        const val ACCOUNT_NOT_CREATED = "Не удалось создать аккаунт"
-        const val EMAIL_OCCUPIED = "Эта почта уже занята"
-        const val WRONG_CREDENTIALS = "Почта или пароль неверные"
-        const val NO_PRODUCTS_FOUND = "Не найдено продуктов"
-        val IMAGE_SIZE_TOO_BIG = fun(imageSize: Int) = "Размер изображения превышает $imageSize МБ."
-        const val IMAGE_IS_EMPTY = "Изображение не найдено"
-        const val USER_NOT_FOUND = "Пользватель с этим токеном не найден"
-        const val NO_FAVORITE_PRODUCTS  = "Не найдено продуктов в списке избранных"
-        const val FAVORITES_REMOVED = "Продукт удален из избранных"
-        const val FAVORITES_ADDED = "Продукт добавлен в избранные"
+        const val ACCOUNT_CREATED = "Account successfully created"
+        const val ACCOUNT_NOT_CREATED = "Error occur in creating the account"
+        const val EMAIL_OCCUPIED = "Email is already occupied"
+        const val WRONG_CREDENTIALS = "Email or password is incorrect"
+        const val NO_PRODUCTS_FOUND = "No products found"
+        val IMAGE_SIZE_TOO_BIG = fun(imageSize: Int) = "The size of the image exceeds $imageSize MB."
+        const val IMAGE_IS_EMPTY = "The image was not found"
+        const val USER_NOT_FOUND = "User with this token was not found "
+        const val NO_FAVORITE_PRODUCTS  = "No favorite products found  "
+        const val FAVORITES_REMOVED = "Product was successfully deleted from favorites"
+        const val FAVORITES_ADDED = "Product was successfully added to favorites"
     }
 }
